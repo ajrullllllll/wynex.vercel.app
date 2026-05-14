@@ -92,7 +92,26 @@
       <footer className="mt-32 mb-10 text-gray-500">
   © 2025 WYnex. All rights reserved.
 </footer>
-      
+      'use client'
+
+import { modal } from './wallet-config'
+import { useAccount } from 'wagmi'
+
+export default function Home() {
+  const { address, isConnected } = useAccount()
+
+  return (
+    <div style={{ padding: 20 }}>
+      <h1>Wynex App</h1>
+
+      <button onClick={() => modal.open()}>
+        {isConnected ? 'Wallet Connected' : 'Connect Wallet'}
+      </button>
+
+      {isConnected && <p>{address}</p>}
+    </div>
+  )
+}
     </main>
   );
 }
